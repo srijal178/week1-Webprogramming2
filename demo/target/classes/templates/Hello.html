@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to My Website</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/about}">About Us</a></li>
+                <li><a th:href="@{/products}">Products</a></li>
+                <li><a th:href="@{/contact}">Contact</a></li>
+            </ul>
+        </nav>
+        <h1 th:text="${welcomeMessage}">Welcome to My Website</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2 th:text="${mainHeading}">Our Featured Products</h2>
+            <p th:text="${mainDescription}">Explore our wide range of products that suit your needs.</p>
+            
+            <div th:each="product : ${products}">
+                <h3 th:text="${product.name}">Product Name</h3>
+                <p th:text="${product.description}">Product Description</p>
+                <p>Price: $<span th:text="${product.price}">0.00</span></p>
+                <a th:href="@{/product/{id}(id=${product.id})}">View Details</a>
+            </div>
+        </section>
+
+        <section>
+            <h2>Latest News</h2>
+            <ul>
+                <li th:each="news : ${newsList}">
+                    <a th:href="@{/news/{id}(id=${news.id})}" th:text="${news.title}">News Title</a>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 My Website</p>
+        <a th:href="@{/privacy}">Privacy Policy</a>
+    </footer>
+</body>
+</html>
+
